@@ -566,10 +566,68 @@
       transform: translateY(-2px);
     }
 
+    /* ===== AMBIENT ATMOSPHERE & ARCHITECTURAL GRID ===== */
+    .bg-mesh-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 1400px;
+      height: 620px;
+      background: radial-gradient(ellipse at 50% -10%, rgba(99, 102, 241, 0.16), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    [data-theme="light"] .bg-mesh-glow {
+      background: radial-gradient(ellipse at 50% -10%, rgba(67, 56, 202, 0.08), transparent 70%);
+    }
+
+    .bg-grid-pattern {
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 64px 64px;
+      background-position: -1px -1px;
+      mask-image: radial-gradient(ellipse at 50% 20%, rgba(0, 0, 0, 0.45) 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, rgba(0, 0, 0, 0.45) 0%, transparent 75%);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.55;
+    }
+
     /* ===== HERO SECTION ===== */
     .hero-section {
       padding: clamp(140px, 18vh, 180px) 0 clamp(60px, 10vh, 100px);
       position: relative;
+    }
+
+    .hero-badge-wrap {
+      margin-bottom: 1.5rem;
+      animation: blurIn 0.8s var(--ease) forwards;
+    }
+
+    .hero-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s ease;
+    }
+
+    .hero-status-pill:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
     }
 
     .hero-intro {
@@ -577,7 +635,7 @@
       font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
       color: var(--text-muted);
       line-height: 1.65;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       animation: blurIn 0.8s var(--ease) forwards;
     }
 
@@ -586,12 +644,33 @@
       font-weight: 500;
     }
 
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 1rem;
+      margin-bottom: 2.75rem;
+      flex-wrap: wrap;
+      animation: fadeIn 0.8s var(--ease) 0.3s forwards;
+      opacity: 0;
+    }
+
+    .hero-btn-primary {
+      padding: 12px 22px;
+      font-weight: 600;
+      gap: 8px;
+    }
+
+    .hero-btn-secondary {
+      padding: 12px 18px;
+    }
+
     .hero-display {
       font-size: clamp(2.75rem, 6.5vw, 5.75rem);
       font-weight: 500;
       line-height: 1.05;
       letter-spacing: -0.04em;
-      margin-bottom: 3.5rem;
+      margin-bottom: 2.5rem;
       max-width: 1080px;
       word-break: break-word;
     }
@@ -643,8 +722,8 @@
 
     .hero-meta-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
       padding-top: 2rem;
       border-top: 1px solid var(--border);
       animation: fadeIn 0.8s var(--ease) 0.6s forwards;
@@ -655,6 +734,30 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      transition: all 0.25s var(--ease);
+    }
+
+    .meta-col:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .meta-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .meta-icon {
+      font-size: 0.75rem;
+      color: var(--accent);
+      opacity: 0.75;
     }
 
     .meta-label {
@@ -669,6 +772,7 @@
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--text);
+      line-height: 1.4;
     }
 
     /* ===== SHOWREEL / FEATURED WORKSPACE BANNER ===== */
@@ -707,6 +811,7 @@
       justify-content: space-between;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding-bottom: 14px;
+      gap: 12px;
     }
 
     .terminal-dots {
@@ -719,6 +824,47 @@
       height: 10px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.2);
+    }
+
+    .terminal-tabs {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .term-tab {
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .term-tab:hover {
+      color: #fff;
+    }
+
+    .term-tab.active {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .term-pane {
+      display: none;
+    }
+
+    .term-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
     }
 
     .terminal-title {
@@ -748,6 +894,11 @@
     .terminal-highlight {
       color: #f8fafc;
       font-weight: 500;
+    }
+
+    .terminal-code-comment {
+      color: rgba(255, 255, 255, 0.4);
+      font-style: italic;
     }
 
     .terminal-stats {
@@ -839,6 +990,72 @@
       letter-spacing: -0.03em;
       line-height: 1.2;
     }
+
+    .project-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    .filter-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 600;
+      border-color: var(--text);
+    }
+
+    .filter-count {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      opacity: 0.7;
+    }
+
+    .work-index-row.filter-hidden {
+      display: none !important;
+    }
+
+    .project-icon-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8125rem;
+      flex-shrink: 0;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .badge-mentorme { background: linear-gradient(135deg, #4338ca, #6366f1); }
+    .badge-rewindos { background: linear-gradient(135deg, #6b21a8, #9333ea); }
+    .badge-agentguard { background: linear-gradient(135deg, #065f46, #10b981); }
+    .badge-uniwork { background: linear-gradient(135deg, #1e40af, #3b82f6); }
+    .badge-marketplace { background: linear-gradient(135deg, #9a3412, #f97316); }
+    .badge-todo { background: linear-gradient(135deg, #9f1239, #f43f5e); }
+    .badge-finance { background: linear-gradient(135deg, #047857, #34d399); }
 
     .work-index-list {
       display: flex;
@@ -1015,6 +1232,60 @@
       border: 1px solid var(--pill-border);
     }
 
+    /* Lab Visual Micro-Widgets */
+    .sound-waveform {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 32px;
+    }
+
+    .sound-waveform span {
+      width: 4px;
+      border-radius: 99px;
+      background: #c084fc;
+      animation: waveDance 1.2s ease-in-out infinite alternate;
+    }
+
+    .sound-waveform span:nth-child(1) { height: 12px; animation-delay: 0.1s; }
+    .sound-waveform span:nth-child(2) { height: 26px; animation-delay: 0.3s; }
+    .sound-waveform span:nth-child(3) { height: 18px; animation-delay: 0.5s; }
+    .sound-waveform span:nth-child(4) { height: 30px; animation-delay: 0.2s; }
+    .sound-waveform span:nth-child(5) { height: 16px; animation-delay: 0.4s; }
+
+    @keyframes waveDance {
+      0% { transform: scaleY(0.4); }
+      100% { transform: scaleY(1.3); }
+    }
+
+    .mini-ticker {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: #4ade80;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mini-commit-log {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: #93c5fd;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(147, 197, 253, 0.25);
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     /* ===== EXPERIENCE INDEX ===== */
     .experience-section {
       padding: 4rem 0 6rem;
@@ -1058,6 +1329,23 @@
       line-height: 1.65;
     }
 
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .exp-tag-pill {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--text-muted);
+    }
+
     /* ===== TECH ARCHITECTURE GRID ===== */
     .stack-section {
       padding: 4rem 0 6rem;
@@ -1074,6 +1362,12 @@
       border-radius: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
+      transition: all 0.25s var(--ease);
+    }
+
+    .stack-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
     }
 
     .stack-card-title {
@@ -1085,6 +1379,9 @@
       margin-bottom: 16px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .stack-pills {
@@ -1101,6 +1398,91 @@
       background: var(--pill-bg);
       border: 1px solid var(--pill-border);
       color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .stack-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+      background: var(--surface-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Floating Back to Top Button */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: max(24px, calc(env(safe-area-inset-bottom) + 16px));
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all 0.25s var(--ease);
+      z-index: 900;
+      cursor: pointer;
+    }
+
+    .back-to-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top-btn:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Floating Keyboard Hint Bar on Desktop */
+    .keyboard-hint-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.6875rem;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      z-index: 900;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .keyboard-hint-pill kbd {
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .keyboard-hint-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .keyboard-hint-pill {
+        display: none;
+      }
     }
 
     /* ===== FOOTER CTA ===== */
@@ -1672,6 +2054,10 @@
 </head>
 <body>
 
+  <!-- Ambient background glow & architectural grid -->
+  <div class="bg-mesh-glow" aria-hidden="true"></div>
+  <div class="bg-grid-pattern" aria-hidden="true"></div>
+
   <!-- Toast for copied email -->
   <div class="toast" id="toast">Copied to clipboard</div>
 
@@ -1795,8 +2181,11 @@
     <!-- HERO SECTION -->
     <section class="hero-section">
       <div class="container">
-        <div class="hero-intro" data-i18n="heroIntro">
-          I build and architect fully custom web systems end to end, from database schemas and resilient APIs to polished, accessible interfaces. <strong>3+ years of professional engineering</strong> across high-scale educational workspaces, fintech automation, and developer tooling.
+        <div class="hero-badge-wrap">
+          <span class="hero-status-pill">
+            <span class="status-dot"></span>
+            <span data-i18n="heroStatusText">Available for Senior Roles &amp; High-Impact Contracts</span>
+          </span>
         </div>
 
         <h1 class="hero-display">
@@ -1811,25 +2200,59 @@
           </span>
         </h1>
 
+        <div class="hero-intro" data-i18n="heroIntro">
+          I build and architect fully custom web systems end to end, from database schemas and resilient APIs to polished, accessible interfaces. <strong>3+ years of professional engineering</strong> across high-scale educational workspaces, fintech automation, and developer tooling.
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="#work" class="btn-primary hero-btn-primary">
+            <span data-i18n="heroCtaWork">Explore Shipped Work</span>
+            <i class="fa-solid fa-arrow-down" style="font-size: 0.75rem;"></i>
+          </a>
+          <a href="Maksat_Zhaksybaev_CV.pdf" download="Maksat_Zhaksybaev_CV.pdf" class="btn-secondary hero-btn-secondary">
+            <i class="fa-regular fa-file-pdf"></i>
+            <span data-i18n="panelDownload">Download CV (PDF)</span>
+          </a>
+          <button type="button" class="btn-secondary hero-btn-secondary" onclick="copyEmail()">
+            <i class="fa-regular fa-copy"></i>
+            <span data-i18n="panelCopy">Copy Email</span>
+          </button>
+        </div>
+
         <div class="hero-meta-grid">
           <div class="meta-col">
-            <span class="meta-label" data-i18n="metaLocLabel">Location</span>
+            <div class="meta-header-row">
+              <span class="meta-label" data-i18n="metaLocLabel">Location</span>
+              <i class="fa-solid fa-location-dot meta-icon"></i>
+            </div>
             <span class="meta-val" data-i18n="metaLocVal">Taraz, Kazakhstan (UTC+5)</span>
           </div>
           <div class="meta-col">
-            <span class="meta-label" data-i18n="metaExpLabel">Experience</span>
+            <div class="meta-header-row">
+              <span class="meta-label" data-i18n="metaExpLabel">Experience</span>
+              <i class="fa-solid fa-bolt meta-icon"></i>
+            </div>
             <span class="meta-val" data-i18n="metaExpVal">3+ Years Shipped</span>
           </div>
           <div class="meta-col">
-            <span class="meta-label" data-i18n="metaSpecLabel">Specialization</span>
+            <div class="meta-header-row">
+              <span class="meta-label" data-i18n="metaSpecLabel">Specialization</span>
+              <i class="fa-solid fa-layer-group meta-icon"></i>
+            </div>
             <span class="meta-val" data-i18n="metaSpecVal">Next.js · FastAPI · AI Systems</span>
           </div>
           <div class="meta-col">
-            <span class="meta-label" data-i18n="metaRelLabel">Reliability</span>
+            <div class="meta-header-row">
+              <span class="meta-label" data-i18n="metaRelLabel">Reliability</span>
+              <i class="fa-solid fa-circle-check meta-icon"></i>
+            </div>
             <span class="meta-val" data-i18n="metaRelVal">150+ Automated Tests</span>
           </div>
           <div class="meta-col">
-            <span class="meta-label" data-i18n="metaLangLabel">Languages</span>
+            <div class="meta-header-row">
+              <span class="meta-label" data-i18n="metaLangLabel">Languages</span>
+              <i class="fa-solid fa-globe meta-icon"></i>
+            </div>
             <span class="meta-val" data-i18n="metaLangVal">KZ (Native) · RU (C1) · EN (B2)</span>
           </div>
         </div>
@@ -1843,20 +2266,32 @@
           <div class="showreel-player">
             <div class="terminal-header">
               <div class="terminal-dots">
-                <div class="terminal-dot"></div>
-                <div class="terminal-dot"></div>
-                <div class="terminal-dot"></div>
+                <div class="terminal-dot" style="background: #ff5f56;"></div>
+                <div class="terminal-dot" style="background: #ffbd2e;"></div>
+                <div class="terminal-dot" style="background: #27c93f;"></div>
               </div>
-              <span class="terminal-title">maksat@production: ~/workspace/mentorme</span>
-              <span class="status-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">PASS 150/150</span>
+              <div class="terminal-tabs" role="tablist" aria-label="Terminal views">
+                <button type="button" class="term-tab active" data-tab="test" id="tabTestBtn"><i class="fa-solid fa-play" style="font-size: 0.6rem;"></i> <span data-i18n="termTabTest">Test Suite</span></button>
+                <button type="button" class="term-tab" data-tab="arch" id="tabArchBtn"><i class="fa-solid fa-network-wired" style="font-size: 0.6rem;"></i> <span data-i18n="termTabArch">API Blueprint</span></button>
+              </div>
+              <span class="status-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #34d399;"><span class="status-dot"></span> PASS 150/150</span>
             </div>
 
             <div class="terminal-body">
-              <div class="terminal-line"><span class="terminal-prompt">$</span> <span>pytest --asyncio-mode=auto -v tests/</span></div>
-              <div class="terminal-line" style="color: rgba(255,255,255,0.7); margin-top: 4px;"><span>✓ test_multimodal_ingestion_pipeline (PDF + YouTube Whisper) PASSED [100%]</span></div>
-              <div class="terminal-line" style="color: rgba(255,255,255,0.7);"><span>✓ test_rag_vector_retrieval_fsrs_spaced_repetition PASSED [100%]</span></div>
-              <div class="terminal-line" style="color: rgba(255,255,255,0.7);"><span>✓ test_playwright_e2e_notion_editor PASSED [100%]</span></div>
-              <div class="terminal-line" style="margin-top: 10px;"><span class="terminal-prompt">$</span> <span class="terminal-highlight">FastAPI server running on 0.0.0.0:8000 | Latency: 18ms</span></div>
+              <div class="term-pane active" id="paneTest">
+                <div class="terminal-line"><span class="terminal-prompt">$</span> <span>pytest --asyncio-mode=auto -v tests/</span></div>
+                <div class="terminal-line" style="color: rgba(255,255,255,0.7); margin-top: 4px;"><span>✓ test_multimodal_ingestion_pipeline (PDF + YouTube Whisper) PASSED [100%]</span></div>
+                <div class="terminal-line" style="color: rgba(255,255,255,0.7);"><span>✓ test_rag_vector_retrieval_fsrs_spaced_repetition PASSED [100%]</span></div>
+                <div class="terminal-line" style="color: rgba(255,255,255,0.7);"><span>✓ test_playwright_e2e_notion_editor PASSED [100%]</span></div>
+                <div class="terminal-line" style="margin-top: 10px;"><span class="terminal-prompt">$</span> <span class="terminal-highlight">FastAPI server running on 0.0.0.0:8000 | Latency: 18ms</span></div>
+              </div>
+              <div class="term-pane" id="paneArch">
+                <div class="terminal-line"><span class="terminal-prompt">$</span> <span>curl -X POST https://api.mentormer.com/v1/workspace/ingest \</span></div>
+                <div class="terminal-line" style="color: rgba(255,255,255,0.7); padding-left: 14px;"><span>-H "Authorization: Bearer mk_live_442" -F "file=@lecture.pdf"</span></div>
+                <div class="terminal-line" style="color: #34d399; margin-top: 6px;"><span>→ 200 OK | Pipeline: Text Extracted · Whisper Transcription Synced</span></div>
+                <div class="terminal-line" style="color: #a5b4fc;"><span>→ FSRS Memory Ledger: 14 Spaced Repetition Cards Initialized</span></div>
+                <div class="terminal-line" style="margin-top: 8px;"><span class="terminal-prompt">$</span> <span class="terminal-code-comment"># Multi-tiered TTS pipeline (Nepvox + edge-tts) · 18ms latency</span></div>
+              </div>
             </div>
 
             <div class="terminal-stats">
@@ -1889,12 +2324,21 @@
           <h2 class="section-title-serif" data-i18n-html="workTitle">Client &amp; production work shipped <span class="serif-accent">end to end</span>.</h2>
         </div>
 
+        <!-- Project Category Filters -->
+        <div class="project-filters" role="tablist" aria-label="Filter Projects">
+          <button type="button" class="filter-btn active" data-filter="all"><span data-i18n="filterAll">All</span> <span class="filter-count">7</span></button>
+          <button type="button" class="filter-btn" data-filter="ai"><span data-i18n="filterAi">AI &amp; Systems</span> <span class="filter-count">3</span></button>
+          <button type="button" class="filter-btn" data-filter="web"><span data-i18n="filterWeb">Full-Stack Web</span> <span class="filter-count">4</span></button>
+          <button type="button" class="filter-btn" data-filter="oss"><span data-i18n="filterOss">Open Source</span> <span class="filter-count">2</span></button>
+        </div>
+
         <div class="work-index-list">
 
           <!-- Row 1: Mentorme -->
-          <a href="https://mentormer.com" target="_blank" rel="noopener" class="work-index-row">
+          <a href="https://mentormer.com" target="_blank" rel="noopener" class="work-index-row" data-category="ai web">
             <span class="work-row-name">
-              Mentorme
+              <span class="project-icon-badge badge-mentorme"><i class="fa-solid fa-brain"></i></span>
+              <span>Mentorme</span>
               <span class="status-badge" style="font-size: 0.6rem;">Production</span>
             </span>
             <span class="work-row-stack" data-i18n="projectMentormeStack">AI Workspace · Next.js 15 · FastAPI · MongoDB · Whisper · FSRS</span>
@@ -1906,9 +2350,10 @@
           </a>
 
           <!-- Row 2: RewindOS -->
-          <a href="https://github.com/themaksat/rewindos" target="_blank" rel="noopener" class="work-index-row">
+          <a href="https://github.com/themaksat/rewindos" target="_blank" rel="noopener" class="work-index-row" data-category="oss">
             <span class="work-row-name">
-              RewindOS
+              <span class="project-icon-badge badge-rewindos"><i class="fa-solid fa-clock-rotate-left"></i></span>
+              <span>RewindOS</span>
               <span class="status-badge" style="font-size: 0.6rem;">Open Source</span>
             </span>
             <span class="work-row-stack" data-i18n="projectRewindStack">Git for OS Sessions · Omniscient State Ledger · TypeScript · SQLite</span>
@@ -1920,9 +2365,10 @@
           </a>
 
           <!-- Row 3: AgentGuard -->
-          <a href="https://github.com/themaksat/agentguard" target="_blank" rel="noopener" class="work-index-row">
+          <a href="https://github.com/themaksat/agentguard" target="_blank" rel="noopener" class="work-index-row" data-category="ai oss">
             <span class="work-row-name">
-              AgentGuard
+              <span class="project-icon-badge badge-agentguard"><i class="fa-solid fa-shield-halved"></i></span>
+              <span>AgentGuard</span>
               <span class="status-badge" style="font-size: 0.6rem;">Security</span>
             </span>
             <span class="work-row-stack" data-i18n="projectAgentStack">AI Agent Security Sandbox · Python · Policy Enforcement · Safety</span>
@@ -1934,8 +2380,11 @@
           </a>
 
           <!-- Row 4: UniWork -->
-          <a href="https://github.com/themaksat/UniWork" target="_blank" rel="noopener" class="work-index-row">
-            <span class="work-row-name">UniWork</span>
+          <a href="https://github.com/themaksat/UniWork" target="_blank" rel="noopener" class="work-index-row" data-category="web">
+            <span class="work-row-name">
+              <span class="project-icon-badge badge-uniwork"><i class="fa-solid fa-graduation-cap"></i></span>
+              <span>UniWork</span>
+            </span>
             <span class="work-row-stack" data-i18n="projectUniStack">University Productivity Workspace · TypeScript · Next.js · Prisma</span>
             <span class="work-row-year">2025</span>
             <i class="fa-solid fa-arrow-up-right-from-square work-row-arrow"></i>
@@ -1945,8 +2394,11 @@
           </a>
 
           <!-- Row 5: Digital Marketplace -->
-          <a href="https://github.com/themaksat/DigitalMarketplace_" target="_blank" rel="noopener" class="work-index-row">
-            <span class="work-row-name">DigitalMarketplace</span>
+          <a href="https://github.com/themaksat/DigitalMarketplace_" target="_blank" rel="noopener" class="work-index-row" data-category="web">
+            <span class="work-row-name">
+              <span class="project-icon-badge badge-marketplace"><i class="fa-solid fa-store"></i></span>
+              <span>DigitalMarketplace</span>
+            </span>
             <span class="work-row-stack" data-i18n="projectMarketStack">Full-Stack Commerce Engine · TypeScript · Payments · Admin Portal</span>
             <span class="work-row-year">2024</span>
             <i class="fa-solid fa-arrow-up-right-from-square work-row-arrow"></i>
@@ -1956,8 +2408,11 @@
           </a>
 
           <!-- Row 6: Collaborative Todo -->
-          <a href="https://github.com/themaksat/collaborative-todo" target="_blank" rel="noopener" class="work-index-row">
-            <span class="work-row-name">Collaborative Todo</span>
+          <a href="https://github.com/themaksat/collaborative-todo" target="_blank" rel="noopener" class="work-index-row" data-category="web">
+            <span class="work-row-name">
+              <span class="project-icon-badge badge-todo"><i class="fa-solid fa-users"></i></span>
+              <span>Collaborative Todo</span>
+            </span>
             <span class="work-row-stack" data-i18n="projectTodoStack">Real-Time State Engine · WebSockets · TypeScript · Multi-User Sync</span>
             <span class="work-row-year">2024</span>
             <i class="fa-solid fa-arrow-up-right-from-square work-row-arrow"></i>
@@ -1967,8 +2422,11 @@
           </a>
 
           <!-- Row 7: Finance Bot -->
-          <a href="https://github.com/themaksat/THE_FINANCE_BOT" target="_blank" rel="noopener" class="work-index-row">
-            <span class="work-row-name">Finance Bot</span>
+          <a href="https://github.com/themaksat/THE_FINANCE_BOT" target="_blank" rel="noopener" class="work-index-row" data-category="ai">
+            <span class="work-row-name">
+              <span class="project-icon-badge badge-finance"><i class="fa-solid fa-chart-line"></i></span>
+              <span>Finance Bot</span>
+            </span>
             <span class="work-row-stack" data-i18n="projectFinanceStack">Automated Telegram Financial Engine · Python · Async Ledger</span>
             <span class="work-row-year">2024</span>
             <i class="fa-solid fa-arrow-up-right-from-square work-row-arrow"></i>
@@ -1994,6 +2452,9 @@
           <a href="https://github.com/themaksat/THE_FINANCE_BOT" target="_blank" rel="noopener" class="maker-card">
             <div class="maker-media" style="background: linear-gradient(135deg, #052e16, #14532d);">
               <i class="fa-solid fa-chart-line" style="color: #4ade80;"></i>
+              <div class="mini-ticker">
+                <i class="fa-solid fa-bolt"></i> Async SQLite · +14.2% Return
+              </div>
             </div>
             <div class="maker-caption">
               <span class="maker-name">Finance Bot</span>
@@ -2004,6 +2465,9 @@
           <a href="https://github.com/themaksat/rewindos" target="_blank" rel="noopener" class="maker-card">
             <div class="maker-media" style="background: linear-gradient(135deg, #172554, #1e3a8a);">
               <i class="fa-solid fa-terminal" style="color: #60a5fa;"></i>
+              <div class="mini-commit-log">
+                <i class="fa-solid fa-code-commit"></i> Session #e891c · SQLite Ledger
+              </div>
             </div>
             <div class="maker-caption">
               <span class="maker-name">Time-Travel Ledger</span>
@@ -2013,7 +2477,13 @@
 
           <a href="https://github.com/themaksat" target="_blank" rel="noopener" class="maker-card">
             <div class="maker-media" style="background: linear-gradient(135deg, #3b0764, #581c87);">
-              <i class="fa-solid fa-waveform-lines" style="color: #c084fc;"></i>
+              <div class="sound-waveform" aria-label="Audio waveform animation">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
             <div class="maker-caption">
               <span class="maker-name">Multimodal TTS Pipeline</span>
@@ -2039,6 +2509,14 @@
             <div class="exp-main-col">
               <h3>Mentorme</h3>
               <p data-i18n="mentormeRole">Full-Stack Developer · Taraz (mentormer.com)</p>
+              <div class="exp-tags">
+                <span class="exp-tag-pill">Next.js 15</span>
+                <span class="exp-tag-pill">FastAPI</span>
+                <span class="exp-tag-pill">Whisper</span>
+                <span class="exp-tag-pill">FSRS</span>
+                <span class="exp-tag-pill">MongoDB</span>
+                <span class="exp-tag-pill">Playwright</span>
+              </div>
             </div>
             <div class="exp-detail-col" data-i18n="mentormeDesc">
               Architected full-stack study workspace utilizing Next.js 15 App Router, FastAPI backend, and MongoDB with GridFS storage. Engineered async multimodal processing engine parsing lecture PDFs, extracting YouTube transcripts via OpenAI Whisper, and synthesizing audio using a multi-tiered TTS pipeline (Nepvox API, edge-tts, Web Speech API). Designed AI tutoring algorithms backed by FSRS (Free Spaced Repetition Scheduler). Maintained 100% test pass rate across 150+ automated unit and integration tests (Pytest + Playwright).
@@ -2050,6 +2528,14 @@
             <div class="exp-main-col">
               <h3 data-i18n="freelanceTitle">Freelance &amp; Consulting</h3>
               <p data-i18n="freelanceRole">Full-Stack Developer · Remote</p>
+              <div class="exp-tags">
+                <span class="exp-tag-pill">React</span>
+                <span class="exp-tag-pill">TypeScript</span>
+                <span class="exp-tag-pill">Node.js</span>
+                <span class="exp-tag-pill">FastAPI</span>
+                <span class="exp-tag-pill">PostgreSQL</span>
+                <span class="exp-tag-pill">Docker</span>
+              </div>
             </div>
             <div class="exp-detail-col" data-i18n="freelanceDesc">
               Built bespoke end-to-end web applications and high-throughput backend services using TypeScript, React, Next.js, Node.js, Express, and FastAPI. Engineered database schemas and migrations with Drizzle ORM and Prisma on PostgreSQL. Configured automated Docker Compose CI/CD pipelines deployed to Linux VPS and Railway. Developed multilingual Telegram bots and automated CRM dashboards for enterprise clients.
@@ -2061,6 +2547,13 @@
             <div class="exp-main-col">
               <h3>Daniar</h3>
               <p data-i18n="daniarRole">Frontend Developer</p>
+              <div class="exp-tags">
+                <span class="exp-tag-pill">React</span>
+                <span class="exp-tag-pill">Next.js</span>
+                <span class="exp-tag-pill">TypeScript</span>
+                <span class="exp-tag-pill">Tailwind CSS</span>
+                <span class="exp-tag-pill">TanStack Query</span>
+              </div>
             </div>
             <div class="exp-detail-col" data-i18n="daniarDesc">
               Developed corporate web portals and internal tool interfaces using React, Next.js, and TypeScript with Tailwind CSS and SCSS design systems. Implemented client-side caching with TanStack React Query and Axios for seamless data synchronization. Optimized Core Web Vitals, achieving 98+ Lighthouse performance scores through server-side rendering (SSR) and static generation (SSG).
@@ -2072,6 +2565,13 @@
             <div class="exp-main-col">
               <h3>MetaStudy</h3>
               <p data-i18n="metastudyRole">Frontend Developer</p>
+              <div class="exp-tags">
+                <span class="exp-tag-pill">React.js</span>
+                <span class="exp-tag-pill">TypeScript</span>
+                <span class="exp-tag-pill">Zustand</span>
+                <span class="exp-tag-pill">GraphQL</span>
+                <span class="exp-tag-pill">Jest</span>
+              </div>
             </div>
             <div class="exp-detail-col" data-i18n="metastudyDesc">
               Engineered responsive user interfaces for an educational platform using React.js, TypeScript, and Tailwind CSS. Implemented predictable state management via Zustand and integrated complex REST and GraphQL endpoints. Authored automated Jest and Playwright test suites that reduced production bug reports by 30%.
@@ -2095,6 +2595,11 @@
             <div class="exp-main-col">
               <h3 data-i18n="ituTitle">International Taraz University</h3>
               <p data-i18n="ituDegree">Bachelor of Science · Computer Engineering</p>
+              <div class="exp-tags">
+                <span class="exp-tag-pill">Algorithms</span>
+                <span class="exp-tag-pill">Distributed Systems</span>
+                <span class="exp-tag-pill">Database Theory</span>
+              </div>
             </div>
             <div class="exp-detail-col" data-i18n="ituDesc">
               Rigorous engineering curriculum focusing on algorithms, distributed computer architecture, data structures, low-level optimization, and database theory.
@@ -2106,6 +2611,11 @@
             <div class="exp-main-col">
               <h3 data-i18n="collegeTitle">Zhambyl Innovation College</h3>
               <p data-i18n="collegeDegree">Associate Degree · Accounting &amp; Audit</p>
+              <div class="exp-tags">
+                <span class="exp-tag-pill">Financial Accounting</span>
+                <span class="exp-tag-pill">Auditing</span>
+                <span class="exp-tag-pill">Transactional Integrity</span>
+              </div>
             </div>
             <div class="exp-detail-col" data-i18n="collegeDesc">
               Formal training in financial accounting standards, commercial auditing procedures, economic analysis, and transactional integrity. Informs architectural precision in fintech and commerce platforms.
@@ -2125,7 +2635,7 @@
 
         <div class="stack-grid">
           <div class="stack-card">
-            <div class="stack-card-title" data-i18n="cardFrontend">Frontend Core</div>
+            <div class="stack-card-title"><i class="fa-solid fa-code" style="color: #60a5fa;"></i> <span data-i18n="cardFrontend">Frontend Core</span></div>
             <div class="stack-pills">
               <span class="stack-pill">TypeScript</span>
               <span class="stack-pill">React</span>
@@ -2139,7 +2649,7 @@
           </div>
 
           <div class="stack-card">
-            <div class="stack-card-title" data-i18n="cardBackend">Backend & APIs</div>
+            <div class="stack-card-title"><i class="fa-solid fa-server" style="color: #34d399;"></i> <span data-i18n="cardBackend">Backend & APIs</span></div>
             <div class="stack-pills">
               <span class="stack-pill">FastAPI</span>
               <span class="stack-pill">Python</span>
@@ -2153,7 +2663,7 @@
           </div>
 
           <div class="stack-card">
-            <div class="stack-card-title" data-i18n="cardData">Data & Persistence</div>
+            <div class="stack-card-title"><i class="fa-solid fa-database" style="color: #fbbf24;"></i> <span data-i18n="cardData">Data & Persistence</span></div>
             <div class="stack-pills">
               <span class="stack-pill">PostgreSQL</span>
               <span class="stack-pill">MongoDB</span>
@@ -2166,7 +2676,7 @@
           </div>
 
           <div class="stack-card">
-            <div class="stack-card-title" data-i18n="cardDevOps">DevOps & Testing</div>
+            <div class="stack-card-title"><i class="fa-solid fa-shield-halved" style="color: #f87171;"></i> <span data-i18n="cardDevOps">DevOps & Testing</span></div>
             <div class="stack-pills">
               <span class="stack-pill">Docker & Compose</span>
               <span class="stack-pill">GitHub Actions CI/CD</span>
@@ -2179,7 +2689,7 @@
           </div>
 
           <div class="stack-card">
-            <div class="stack-card-title" data-i18n="cardAI">AI & Multimodal</div>
+            <div class="stack-card-title"><i class="fa-solid fa-brain" style="color: #c084fc;"></i> <span data-i18n="cardAI">AI & Multimodal</span></div>
             <div class="stack-pills">
               <span class="stack-pill">RAG Architectures</span>
               <span class="stack-pill">OpenAI Whisper</span>
@@ -2191,7 +2701,7 @@
           </div>
 
           <div class="stack-card">
-            <div class="stack-card-title" data-i18n="cardLang">Languages & Methodologies</div>
+            <div class="stack-card-title"><i class="fa-solid fa-globe" style="color: #38bdf8;"></i> <span data-i18n="cardLang">Languages & Methodologies</span></div>
             <div class="stack-pills">
               <span class="stack-pill" data-i18n="langPillKz">Kazakh (Native)</span>
               <span class="stack-pill" data-i18n="langPillRu">Russian (C1 Fluent)</span>
@@ -2238,6 +2748,20 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button type="button" class="back-to-top-btn" id="backToTop" aria-label="Back to top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Desktop Keyboard Shortcuts Bar -->
+  <div class="keyboard-hint-pill" id="keyboardHint" aria-hidden="true">
+    <span>Shortcuts:</span>
+    <kbd>T</kbd> theme
+    <kbd>L</kbd> lang
+    <kbd>C</kbd> copy
+    <kbd>W</kbd> work
+  </div>
 
   <script>
     // i18n Translations Dictionary: EN, RU, KZ
@@ -2324,7 +2848,15 @@
         footerBtnCopy: "Copy Address",
         footerBottom: "© 2026 Maksat Zhaksybaev. Handcrafted in Taraz, Kazakhstan.",
         footerResumeLink: "Resume",
-        toastCopied: "Copied to clipboard"
+        toastCopied: "Copied to clipboard",
+        heroStatusText: "Available for Senior Roles & High-Impact Contracts",
+        heroCtaWork: "Explore Shipped Work",
+        termTabTest: "Test Suite",
+        termTabArch: "API Blueprint",
+        filterAll: "All",
+        filterAi: "AI & Systems",
+        filterWeb: "Full-Stack Web",
+        filterOss: "Open Source"
       },
       ru: {
         wordmarkRole: "Дизайн и Full-Stack",
@@ -2408,7 +2940,15 @@
         footerBtnCopy: "Скопировать адрес",
         footerBottom: "© 2026 Максат Жаксыбаев. Создано в Таразе, Казахстан.",
         footerResumeLink: "Резюме",
-        toastCopied: "Скопировано в буфер"
+        toastCopied: "Скопировано в буфер",
+        heroStatusText: "Доступен для Senior-позиций и контрактных проектов",
+        heroCtaWork: "Смотреть проекты",
+        termTabTest: "Набор тестов",
+        termTabArch: "Архитектура API",
+        filterAll: "Все",
+        filterAi: "AI и системы",
+        filterWeb: "Full-Stack веб",
+        filterOss: "Open Source"
       },
       kz: {
         wordmarkRole: "Дизайн және Full-Stack",
@@ -2492,7 +3032,15 @@
         footerBtnCopy: "Мекенжайды көшіру",
         footerBottom: "© 2026 Мақсат Жақсыбаев. Тараз қаласында жасалған.",
         footerResumeLink: "Түйіндеме",
-        toastCopied: "Буферге көшірілді"
+        toastCopied: "Буферге көшірілді",
+        heroStatusText: "Senior-позициялар мен ауқымды келісімшарттарға қолжетімді",
+        heroCtaWork: "Жобаларды көру",
+        termTabTest: "Тест топтамасы",
+        termTabArch: "API архитектурасы",
+        filterAll: "Барлығы",
+        filterAi: "AI және жүйелер",
+        filterWeb: "Full-Stack веб",
+        filterOss: "Open Source"
       }
     };
 
@@ -2662,6 +3210,80 @@
         setTimeout(() => toast.classList.remove('show'), 2200);
       });
     }
+
+    // Terminal Tabs Switcher (Test Suite vs API Blueprint)
+    const termTabs = document.querySelectorAll('.term-tab');
+    termTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        termTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const target = tab.getAttribute('data-tab');
+        const paneTest = document.getElementById('paneTest');
+        const paneArch = document.getElementById('paneArch');
+        if (target === 'test') {
+          paneTest?.classList.add('active');
+          paneArch?.classList.remove('active');
+        } else {
+          paneArch?.classList.add('active');
+          paneTest?.classList.remove('active');
+        }
+      });
+    });
+
+    // Project Category Filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workRows = document.querySelectorAll('.work-index-row');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        workRows.forEach(row => {
+          const categories = (row.getAttribute('data-category') || '').split(' ');
+          if (filter === 'all' || categories.includes(filter)) {
+            row.classList.remove('filter-hidden');
+          } else {
+            row.classList.add('filter-hidden');
+          }
+        });
+      });
+    });
+
+    // Floating Back to Top Button
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 450) {
+        backToTopBtn?.classList.add('visible');
+      } else {
+        backToTopBtn?.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Desktop Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      const key = e.key.toLowerCase();
+      if (key === 't') {
+        const current = htmlEl.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      } else if (key === 'l') {
+        const langs = ['en', 'ru', 'kz'];
+        const nextIdx = (langs.indexOf(currentLang) + 1) % langs.length;
+        setLanguage(langs[nextIdx]);
+      } else if (key === 'c') {
+        copyEmail();
+      } else if (key === 'w') {
+        document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   </script>
 </body>
 </html>
